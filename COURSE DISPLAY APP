@@ -1,0 +1,108 @@
+//
+//  ViewController.swift
+//  CoursedisplaApp
+//
+//  Created by Sattor,Sri Harshika on 9/28/23.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    
+    @IBOutlet weak var imageDisplay: UIImageView!
+    
+    
+    @IBOutlet weak var crsNumber: UILabel!
+    
+    
+    
+    @IBOutlet weak var crsName: UILabel!
+    
+    
+    
+    
+    @IBOutlet weak var semOffered: UILabel!
+    
+    
+    @IBOutlet weak var prevBtnOL: UIButton!
+    
+    
+    @IBOutlet weak var nextBtnOL: UIButton!
+    
+    //CREATE AND ARRAY OF COURSES
+    
+    var courses = [["img01", "44542", "Network security","Fall 2023"],["img02","44643","IOS", "Fall 2023"],["img03", "44555", "data Streaming","Summer 2024"]]
+    var imageNumber = 0
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        //PREVIOUS BUTTON IS DISABLED
+        prevBtnOL.isEnabled = false
+        
+        //DISPLAY THE FIRST COURSE DETAILS
+        
+        crsNumber.text = courses[0][1]
+        crsName.text = courses[0][2]
+        semOffered.text = courses[0][3]
+        
+        imageDisplay.image = UIImage(named: courses[0][0])
+    }
+    
+    @IBAction func prevBtnClicked(_ sender: UIButton) {
+        //NEXT BUTTON SHOULD BE ENABLED
+        nextBtnOL.isEnabled = true
+        
+        
+        //DECREMENT THE IMAGE NUMBER
+        imageNumber -= 1
+        
+        //Updatse display image using updateDisplay() function
+        
+        updateDisplay(imageNumber)
+        
+        
+        //IF YOU REACHED BEGINNNING OF THE ARRAY PREV BUTTON SHOULD BE DISABLED
+        if(imageNumber == 0){
+            prevBtnOL.isEnabled = false
+        }
+    }
+    
+    @IBAction func nextBtnClicked(_ sender: UIButton) {
+        //PREVIOUS BUTTON MUST BE ENABLED
+        prevBtnOL.isEnabled = true
+        
+        //NEXT ELEMENT IN THE COURSE ARRAY MUST BE DISPLAYED
+        
+        
+        imageNumber += 1
+        
+        //CALL THE UPDATE DISPLAY METHOD
+        
+        updateDisplay(imageNumber)
+        
+        
+        //WHEN WE REACHED THE END THE ARRAY, THE NEXT BUTTON MUST BE DISABLED
+        
+        if(imageNumber == courses.count-1){
+            nextBtnOL.isEnabled = false
+        }
+        
+        
+    }
+            
+            func updateDisplay(_ imageNumber:Int){
+                crsNumber.text = courses[imageNumber][1]
+                crsName.text = courses[imageNumber][2]
+                semOffered.text = courses[imageNumber][3]
+                imageDisplay.image = UIImage(named : courses[imageNumber][0])
+            }
+            
+            
+        }
+    
+
+
