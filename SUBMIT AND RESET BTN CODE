@@ -1,0 +1,95 @@
+//
+//  ViewController.swift
+//  Sattor_Assignment2
+//
+//  Created by sri harshika sattor on 9/11/23.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    
+    @IBOutlet weak var nameOutlet: UITextField!
+    
+    
+    
+    @IBOutlet weak var billAmountOutlet: UITextField!
+    
+    
+    
+    @IBOutlet weak var tipPercentageOutlet: UITextField!
+    
+    
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
+    
+    @IBOutlet weak var bIllAmountLabel: UILabel!
+    
+    
+    
+    @IBOutlet weak var tipAmountLabel: UILabel!
+    
+    
+    
+    @IBOutlet weak var totalAmountLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func submitBTN(_ sender: UIButton) {
+        //READ VALUES FROM TEXT FIELDS
+        if let name = nameOutlet.text,
+           let billAmount = billAmountOutlet.text,
+           let tipPercentageText = tipPercentageOutlet.text{
+            
+            //TO CONVERT TEXT TO NUMERIC VALUES
+            if let billAmount = Double(billAmount),
+               let tipPercentageText = Double(tipPercentageText){
+                
+                //CALCULATE TIP AND TOTAL
+                let tipAmount = (billAmount * tipPercentageText)/100.0
+                
+                let totalAmount = billAmount + tipAmount
+                
+                
+                //DISPLAY THE NAME, BILL AMOUNT, TIP AMOUNT AND TOTAL
+                let formattedTipAmount = String(format : "%.2f", tipAmount)
+                let formattedTotalAmount = String(format : "%.2f", totalAmount)
+                
+                //DISPLAY IN UI
+                nameLabel.text! = "Name: \(name)"
+                bIllAmountLabel.text! = "BillAmount: $\(billAmount)"
+                tipAmountLabel.text! = "Tip Amount: $\(formattedTipAmount)"
+                totalAmountLabel.text! = "TotalAmount: $\(formattedTotalAmount)"
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    @IBAction func ResetBTN(_ sender: UIButton) {
+        //clear text fields
+        nameOutlet.text! = ""
+        billAmountOutlet.text! = ""
+        tipPercentageOutlet.text! = ""
+    
+        //CLEAR THE LABELS
+        nameLabel.text! = ""
+        bIllAmountLabel.text! = ""
+        tipAmountLabel.text! = ""
+        totalAmountLabel.text! = ""
+        
+    }
+    
+    
+}
